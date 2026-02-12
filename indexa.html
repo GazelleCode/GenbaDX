@@ -1,77 +1,157 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>らくらく現場打刻 | 社労士パートナー募集</title>
+    <title>らくらく現場打刻 | 社労士パートナー先行募集</title>
+    <meta name="description" content="手書きFAX・転記作業をゼロにする現場専用勤怠ツール。社労士監修の「らくらく現場打刻」先行パートナー募集中。">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body { font-family: 'Roboto', 'Noto Sans JP', sans-serif; font-feature-settings: "palt"; letter-spacing: 0.03em; }
-        .gradient-bg { background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%); }
-        .gold-text { color: #fbbf24; }
-        .step-arrow { position: relative; }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-float-delay { animation: float 6s ease-in-out 3s infinite; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
-        }
-        .card-hover { transition: all 0.3s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
-        .step-arrow::after {
-            content: "▼"; position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%);
-            font-size: 32px; color: #94a3b8; z-index: 10;
-        }
-        @media (min-width: 768px) {
-            .step-arrow::after {
-                content: "▶"; bottom: auto; right: -25px; top: 50%; left: auto; transform: translateY(-50%);
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',  /* 濃紺 */
+                            main: '#1e3a8a',  /* メイン青 */
+                            light: '#3b82f6', /* 明るい青 */
+                            accent: '#f59e0b',/* ゴールド/オレンジ */
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'shine': 'shine 1s ease-in-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shine: {
+                            '0%': { left: '-100%' },
+                            '100%': { left: '100%' }
+                        }
+                    }
+                }
             }
         }
+    </script>
+
+    <style>
+        /* スクロールアニメーション用のクラス */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ヒーローセクションの背景パターン */
+        .hero-pattern {
+            background-color: #111827;
+            background-image: radial-gradient(#374151 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* グラデーションテキスト */
+        .text-gradient {
+            background: linear-gradient(to right, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
-<body class="bg-slate-50 text-slate-800 antialiased leading-loose text-lg">
+</head>
+<body class="font-sans text-slate-800 antialiased bg-slate-50 overflow-x-hidden">
 
-    <div class="bg-white pt-12 pb-12 px-4">
-        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12">
-            <img src="img/logo.png" alt="Genba DX Inc." class="h-24 md:h-32 w-auto">
-            <img src="img/dakoku_logo.png" alt="らくらく現場打刻" class="h-32 md:h-48 w-auto drop-shadow-xl">
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="img/dakoku_logo.png" alt="らくらく現場打刻" class="h-10 w-auto">
+                <img src="img/logo.png" alt="社名ロゴ" class="h-10 w-auto">
+
+
+                </div>
+            <a href="#partner-form" class="bg-brand-main hover:bg-brand-dark text-white text-xs md:text-sm font-bold py-2.5 px-4 md:px-6 rounded-full transition shadow-md whitespace-nowrap">
+                パートナー登録(無料)
+            </a>
         </div>
-    </div>
+    </nav>
 
-    <header class="gradient-bg text-white py-12 px-4">
-        <div class="container mx-auto max-w-5xl flex flex-col md:flex-row items-center gap-4">
-            <div class="md:w-2/3 text-center md:text-left">
-                <span class="inline-block bg-yellow-400 text-blue-900 text-base md:text-lg font-bold px-4 py-1 rounded-full mb-4">
-                    手書き・FAX勤怠にお困りの先生へ
-                </span>
-                <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6">
-                    先生の作業は<br>
-                    <span class="gold-text border-b-4 border-yellow-400">CSVをDLするだけ。</span>
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 text-slate-200 leading-loose">
-                    顧問先の「現場」と、先生の「給与ソフト」を<br>
-                    直接つなぐ、一番シンプルな入力装置。<br>
-                    <strong>入力代行・転記作業をゼロにします。</strong>
-                </p>
-                <a href="#partner-form" class="bg-gradient-to-r from-yellow-400 to-yellow-300 hover:from-yellow-300 hover:to-yellow-200 text-blue-900 font-black text-xl py-4 px-10 rounded-full shadow-lg transition-all transform hover:scale-105 inline-flex items-center gap-2 border-b-4 border-yellow-600 active:border-b-0 active:translate-y-1">
-                    <i class="fa-solid fa-arrow-down"></i> まずは無料で試してみる
-                </a>
-            </div>
-            <div class="md:w-1/3">
-                <div class="relative md:mr-16">
-                    <!-- Back Phone -->
-                    <div class="absolute top-4 left-28 w-full transform rotate-6 z-0 opacity-90">
-                        <div class="animate-float">
-                            <img src="img/screen (1).png" alt="管理画面" class="w-full">
+    <header class="hero-pattern text-white pt-28 pb-16 md:pt-40 md:pb-24 px-4 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full md:w-1/2 h-full bg-gradient-to-b md:bg-gradient-to-l from-blue-900/40 to-transparent pointer-events-none"></div>
+
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <div class="flex flex-col md:flex-row items-center gap-10 md:gap-12">
+                
+                <div class="w-full md:w-3/5 text-center md:text-left reveal active">
+                    <div class="flex flex-wrap gap-2 md:gap-3 justify-center md:justify-start mb-6">
+                        <span class="bg-yellow-500 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full shadow-lg border border-yellow-400 uppercase tracking-wider">
+                            <i class="fa-solid fa-graduation-cap mr-1"></i> 東大AI-LINK
+                        </span>
+                        <span class="bg-white/10 backdrop-blur border border-white/30 text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full">
+                            <i class="fa-solid fa-user-tie mr-1"></i> 現役社労士 共同開発
+                        </span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-tight md:leading-relaxed mb-6 md:mb-8 drop-shadow-lg tracking-tight">
+                        先生、まだ<br class="hidden md:inline">
+                        <span class="text-gradient border-b-4 border-yellow-500/50 inline-block md:inline leading-normal">「手書きFAXの解読」</span>を<br>
+                        ご自身でされているのですか？
+                    </h1>
+                    
+                    <p class="text-slate-300 text-sm md:text-xl mb-8 leading-relaxed font-light max-w-lg mx-auto md:mx-0">
+                        顧問先の「現場」と、先生の「給与ソフト」を直結。<br class="hidden sm:inline">
+                        入力代行・転記作業をゼロにする、現場専用・打刻ツール。
+                    </p>
+
+                    <div class="flex flex-col items-center md:items-start gap-3">
+                        <a href="#partner-form" class="w-full md:w-auto text-center group relative bg-brand-accent hover:bg-yellow-400 text-blue-900 font-black text-lg md:text-xl py-4 md:py-5 px-8 md:px-10 rounded-full shadow-[0_0_20px_rgba(245,158,11,0.5)] transition-all transform hover:-translate-y-1 overflow-hidden">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                無料でパートナー登録する <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            </span>
+                            <div class="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-[30deg] group-hover:animate-[shine_1s_ease-in-out]"></div>
+                        </a>
+                        <p class="text-xs text-slate-400">※期間限定・費用は永年無料</p>
+                    </div>
+
+                    <div class="mt-8 md:mt-10 pt-6 border-t border-slate-700/50">
+                        <p class="text-[10px] md:text-xs text-slate-400 mb-3 font-bold tracking-widest uppercase">対応実績 (CSV連携)</p>
+                        <div class="flex flex-wrap gap-x-4 gap-y-2 justify-center md:justify-start opacity-80 grayscale hover:grayscale-0 transition-all text-sm md:text-base font-bold text-slate-300">
+                            <span>Cells</span>
+                            <span class="border-l border-slate-600 h-5 my-auto"></span>
+                            <span>弥生給与</span>
+                            <span class="border-l border-slate-600 h-5 my-auto"></span>
+                            <span>freee</span>
+                            <span class="border-l border-slate-600 h-5 my-auto"></span>
+                            <span>Money Forward</span>
                         </div>
                     </div>
-                    <!-- Front Phone -->
-                    <div class="relative z-10 transform -translate-x-8">
-                        <div class="animate-float-delay">
-                            <img src="img/screen (2).png" alt="スマホ画面" class="w-full">
-                            <div class="absolute -bottom-4 -left-4 bg-yellow-300 text-blue-900 font-bold px-4 py-2 rounded-full shadow-lg transform -rotate-3 border-2 border-white">
-                                ログイン不要！<br>押すだけ！
+                </div>
+
+                <div class="w-full md:w-2/5 relative reveal active delay-200 mt-16 md:mt-0">
+                    <div class="relative w-full max-w-sm mx-auto md:max-w-none aspect-square animate-float">
+                        <div class="absolute top-0 right-0 w-2/3 z-0 transform rotate-6 opacity-90 rounded-xl overflow-hidden shadow-2xl">
+                            <img src="img/screen (1).png" alt="管理画面" class="w-full h-auto">
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-2/3 z-10 rounded-[2rem] overflow-hidden shadow-2xl">
+                            <img src="img/screen (2).png" alt="スマホ打刻画面" class="w-full h-auto">
+                            <div class="absolute bottom-4 right-4 bg-green-600 px-3 py-1.5 rounded-full shadow-lg border border-green-500 flex items-center gap-1.5 animate-bounce">
+                                <i class="fa-solid fa-location-dot text-white text-lg"></i>
+                                <div class="text-[10px] md:text-xs font-bold text-white">GPS認証対応</div>
                             </div>
                         </div>
                     </div>
@@ -80,157 +160,300 @@
         </div>
     </header>
 
-    <section class="py-16 px-4 bg-white">
-        <div class="container mx-auto max-w-5xl">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-blue-900">
-                    「で、私は何をすればいいの？」<br>
-                    <span class="text-lg font-normal text-gray-600">導入から毎月の運用まで、これだけのステップです。</span>
+    <section class="py-16 md:py-24 px-4 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12 md:mb-16 reveal">
+                <h2 class="text-2xl md:text-4xl font-bold text-brand-dark mb-4 leading-snug">
+                    最新の給与ソフトを入れても、<br>
+                    先生の業務が楽にならない<br class="md:hidden">
+                    <span class="text-red-600 underline decoration-wavy decoration-red-200">本当の理由</span>
+                </h2>
+                <div class="w-16 md:w-24 h-1 bg-brand-accent mx-auto rounded"></div>
+            </div>
+
+            <div class="bg-slate-50 p-6 md:p-10 rounded-2xl border border-slate-200 shadow-sm reveal">
+                <p class="font-bold text-center text-slate-600 mb-8 text-sm md:text-base">こんな「アナログの壁」にぶつかっていませんか？</p>
+                <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-100 text-red-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base md:text-lg">解読不能な手書きの日報</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">月末になると大量のFAXが届く。クセ字や汚れで数字が読めず、確認の電話が必要になる。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-100 text-red-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base md:text-lg">現場への指導ができない</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">社長に何度「ちゃんと書いて」と言っても、「現場は忙しいから」と改善されない。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-100 text-red-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base md:text-lg">入力ミスの恐怖</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">スタッフがExcelへ転記する際、ミスがないか神経をすり減らしてダブルチェックしている。</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-red-100 text-red-500 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <i class="fa-solid fa-check text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base md:text-lg">FAX用紙のセキュリティ</h3>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1 leading-relaxed">「機密情報」と言いつつ、FAX用紙が誰でも見れる状態で机に置かれている。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center reveal">
+                <div class="inline-block bg-white border-4 border-red-500 rounded-3xl p-8 md:p-12 shadow-2xl relative transform hover:scale-105 transition-transform duration-300">
+                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-red-500 text-white font-bold px-6 py-1 rounded-full text-sm shadow-md">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> 根本的な原因
+                    </div>
+                    <p class="text-xl md:text-2xl font-bold text-slate-700 leading-relaxed">
+                        原因は、先生の事務所ではありません。<br>
+                        <span class="text-red-600 text-2xl md:text-4xl block mt-3 md:mt-4 font-black">「入り口（現場）」のアナログ環境</span>
+                        <span class="text-base md:text-lg block mt-2">にあります。</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 px-4 bg-brand-dark text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10" style="background-image: url('https://www.transparenttextures.com/patterns/blueprint.png');"></div>
+        
+        <div class="container mx-auto max-w-4xl relative z-10">
+            <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                <div class="w-full md:w-1/3 text-center reveal">
+                    <div class="w-32 h-32 md:w-48 md:h-48 mx-auto bg-gray-300 rounded-full border-4 border-white/20 shadow-2xl overflow-hidden relative mb-4">
+                        <img src="https://placehold.co/400x400/1e3a8a/fff?text=KITAMURA" alt="北村先生" class="w-full h-full object-cover">
+                    </div>
+                    <p class="font-bold text-lg">社会保険労務士<br>北村 先生</p>
+                    <p class="text-xs text-slate-400 mt-1">共同開発・監修</p>
+                </div>
+                
+                <div class="w-full md:w-2/3 reveal">
+                    <h2 class="text-xl md:text-3xl font-bold mb-6 leading-relaxed text-center md:text-left">
+                        「社労士の仕事は、<span class="text-brand-accent">経営アドバイスや相談である</span>」<br>
+                        北村先生のプロとしての姿勢が、開発の原点でした。
+                    </h2>
+                    <div class="space-y-4 text-slate-300 text-sm md:text-base leading-relaxed text-justify md:text-left">
+                        <p>
+                            開発にあたり、北村先生から<strong>社労士業務の本質</strong>を教えていただきました。<br>
+                            「私たちの仕事は、打刻データの書き写しではない。私たちしかできないコンサルティングを通じて、顧問先の会社と従業員の生活を守ることだ。だから、<strong>DX化は社労士の先生方を助ける小鬼つながるんだよ</strong>」と。
+                        </p>
+                        <p>
+                            しかし、現場からの打刻データが「手書き」である限り、入力の手間は省けず読み間違いや入力ミスのリスクも消えません。<br>
+                            そして、その確認作業は先生方の本来の強みである<strong>「顧問先への経営アドバイス」</strong>や<strong>「労務相談」</strong>の時間を奪い続けています。
+                        </p>
+                        
+                        <div class="py-4">
+                            <p class="font-bold text-white text-lg mb-4 text-center">私たちが目指したのは、この解決です。</p>
+                            <blockquote class="bg-white/5 p-8 rounded-xl italic text-white font-medium my-6 text-center shadow-lg">
+                                <span class="text-brand-accent font-bold text-2xl md:text-3xl block mb-2 leading-relaxed">「現場には、迷わない操作を。<br>先生には、本業に向き合う仕事を。」</span>
+                            </blockquote>
+                        </div>
+
+                        <p>
+                            現場はボタンを押すだけ。でも、先生の手元には法律に準拠した完璧なデータが届く。<br>
+                            このツールは、先生が<strong>「プロの仕事」に集中するための時間を生み出すツール</strong>です。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 md:py-24 px-4 bg-slate-50">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12 md:mb-16 reveal">
+                <h2 class="text-2xl md:text-4xl font-bold text-brand-dark mb-4 leading-tight">
+                    「誰でも説明なしで使える」解決策を、<br class="hidden md:inline">
+                    先生の代わりに現場へ配ります。
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <!-- STEP 1 -->
-                <div class="bg-white p-6 pt-10 rounded-xl border-t-8 border-blue-500 shadow-xl relative step-arrow card-hover">
-                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white font-black text-lg px-6 py-2 rounded-full shadow-md border-4 border-white">STEP 1</div>
-                    <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-100 text-blue-600 rounded-full mb-4 text-4xl shadow-inner">
-                            <i class="fa-solid fa-desktop"></i>
+            <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-b-4 border-brand-main hover:-translate-y-2 transition-transform duration-300 reveal">
+                    <div class="h-40 md:h-48 bg-slate-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <div class="text-center">
+                            <div class="w-20 h-20 bg-blue-500 rounded-lg mx-auto mb-2 shadow-lg flex items-center justify-center">
+                                <span class="text-white font-bold text-xs">押すだけ</span>
+                            </div>
+                            <span class="text-xs font-bold text-slate-400">誰でも簡単</span>
                         </div>
-                        <h3 class="font-bold text-xl mb-3 text-blue-900">先生が設定</h3>
-                        <p class="text-base text-gray-600 leading-relaxed">先生専用の管理画面で、顧問先の「会社名」と「時給ルール」を入力します。</p>
                     </div>
+                    <h3 class="text-lg md:text-xl font-bold text-brand-dark mb-3">どんな人でも説明なしで使える</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        ログイン画面なし。説明書不要。ツールを開いて巨大なボタンを押すだけ。
+                        高齢の従業員さんや、外国人の技能実習生でも、説明なしで直感的に使えます。
+                    </p>
                 </div>
 
-                <!-- STEP 2 -->
-                <div class="bg-white p-6 pt-10 rounded-xl border-t-8 border-teal-500 shadow-xl relative step-arrow card-hover">
-                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-teal-600 text-white font-black text-lg px-6 py-2 rounded-full shadow-md border-4 border-white">STEP 2</div>
-                    <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-teal-100 text-teal-600 rounded-full mb-4 text-4xl shadow-inner">
-                            <i class="fa-solid fa-qrcode"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3 text-teal-900">QRを現場へ</h3>
-                        <p class="text-base text-gray-600 leading-relaxed">発行されたQRコードを社長に渡して「現場に貼って」と伝えるだけ。</p>
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-b-4 border-brand-accent hover:-translate-y-2 transition-transform duration-300 reveal delay-100">
+                    <div class="h-40 md:h-48 bg-slate-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden">
+                        <i class="fa-solid fa-file-csv text-5xl md:text-6xl text-green-600"></i>
                     </div>
+                    <h3 class="text-lg md:text-xl font-bold text-brand-dark mb-3">もう手書きの記録はさようなら</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        先生の作業は、月末に管理画面から「CSVダウンロード」をクリックするだけ。
+                        Cells、弥生、freeeなど、お使いのソフトに合わせた形式で出力します。
+                    </p>
                 </div>
 
-                <!-- STEP 3 -->
-                <div class="bg-white p-6 pt-10 rounded-xl border-t-8 border-orange-500 shadow-xl relative step-arrow card-hover">
-                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white font-black text-lg px-6 py-2 rounded-full shadow-md border-4 border-white">STEP 3</div>
-                    <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 text-orange-600 rounded-full mb-4 text-4xl shadow-inner">
-                            <i class="fa-solid fa-mobile-screen-button"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3 text-orange-900">現場が打刻</h3>
-                        <p class="text-base text-gray-600 leading-relaxed">スタッフはスマホでQRを読むだけ。ID入力なしで、毎日ボタンを押します。</p>
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-lg border-b-4 border-brand-main hover:-translate-y-2 transition-transform duration-300 reveal delay-200">
+                    <div class="h-40 md:h-48 bg-slate-100 rounded-xl mb-6 flex items-center justify-center overflow-hidden relative">
+                        <i class="fa-solid fa-map-location-dot text-5xl md:text-6xl text-brand-main"></i>
+                        <i class="fa-solid fa-shield-halved text-2xl text-brand-accent absolute top-8 right-12 md:top-10 md:right-14 bg-white rounded-full p-1"></i>
                     </div>
+                    <h3 class="text-lg md:text-xl font-bold text-brand-dark mb-3">リスク管理も完璧</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        GPSで打刻場所を記録し「カラ出勤」や「労働時間の改ざん」を物理的に防ぎます。
+                        正確な記録は、労務トラブルから顧問先を守る盾になります。
+                    </p>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- STEP 4 -->
-                <div class="bg-white p-6 pt-10 rounded-xl border-t-8 border-indigo-500 shadow-xl relative card-hover">
-                    <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-indigo-600 text-white font-black text-lg px-6 py-2 rounded-full shadow-md border-4 border-white">STEP 4</div>
-                    <div class="text-center">
-                        <div class="inline-flex items-center justify-center w-20 h-20 bg-indigo-100 text-indigo-600 rounded-full mb-4 text-4xl shadow-inner">
-                            <i class="fa-solid fa-file-csv"></i>
-                        </div>
-                        <h3 class="font-bold text-xl mb-3 text-indigo-900">CSV回収</h3>
-                        <p class="text-base text-gray-600 leading-relaxed">月末、先生は管理画面からデータを確認し、給与ソフト用CSVをDLします。</p>
+    <section class="py-16 md:py-24 px-4 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="bg-gradient-to-br from-blue-50 to-slate-50 border border-blue-100 rounded-3xl p-6 md:p-12 reveal shadow-sm">
+                <div class="flex flex-col-reverse md:flex-row items-center gap-8 md:gap-10">
+                    <div class="md:w-1/2">
+                        <h3 class="text-xl md:text-2xl font-bold text-brand-dark mb-4 leading-snug">
+                            入力代行はツールへ。<br>
+                            先生は「コンサル」へ。
+                        </h3>
+                        <p class="text-sm md:text-base text-slate-600 mb-6 leading-relaxed">
+                            単純作業は学生の私が作ったツールに任せてください。<br class="hidden md:inline">
+                            先生は、蓄積された正確なデータを使って「賃金規定の見直し」や「労務コンサルティング」といった、<strong class="text-brand-main underline decoration-2 decoration-brand-accent">先生にしかできない付加価値の高い仕事</strong>に集中してください。
+                        </p>
+
+                        <ul class="space-y-3 bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+                            <li class="flex items-center text-sm font-bold text-slate-700">
+                                <i class="fa-solid fa-check-circle text-green-500 mr-3 text-lg"></i> 正確性の担保
+                            </li>
+                            <li class="flex items-center text-sm font-bold text-slate-700">
+                                <i class="fa-solid fa-check-circle text-green-500 mr-3 text-lg"></i> セキュリティ強化
+                            </li>
+                            <li class="flex items-center text-sm font-bold text-slate-700">
+                                <i class="fa-solid fa-check-circle text-green-500 mr-3 text-lg"></i> 高単価業務へのシフト
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="w-full md:w-1/2 text-center">
+                        <img src="img/consulting.png" alt="コンサルティング" class="rounded-xl shadow-lg w-full h-auto">
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="partner-form" class="py-16 md:py-24 px-4 bg-brand-dark text-white relative">
+        <div class="container mx-auto max-w-3xl text-center relative z-10">
             
-            <div class="mt-10 text-center">
-                <p class="font-bold text-gray-700 mb-4">以下の主要ソフト形式にワンクリックで出力可能です</p>
-                <div class="flex flex-wrap justify-center gap-4 opacity-70">
-                    <span class="bg-gray-200 px-4 py-2 rounded font-bold text-gray-600 text-lg">Cells（セルズ）</span>
-                    <span class="bg-gray-200 px-4 py-2 rounded font-bold text-gray-600 text-lg">弥生給与</span>
-                    <span class="bg-gray-200 px-4 py-2 rounded font-bold text-gray-600 text-lg">freee人事労務</span>
-                    <span class="bg-gray-200 px-4 py-2 rounded font-bold text-gray-600 text-lg">MFクラウド</span>
-                    <span class="bg-gray-200 px-4 py-2 rounded font-bold text-gray-600 text-lg">その他CSV</span>
-                </div>
+            <div class="inline-block bg-brand-accent text-brand-dark font-black px-4 py-1 rounded text-sm mb-6 animate-pulse">
+                残り枠わずか
             </div>
-        </div>
-    </section>
 
-    <section class="py-16 px-4 bg-gradient-to-b from-gray-50 to-gray-100">
-        <div class="container mx-auto max-w-4xl flex flex-col md:flex-row items-center gap-10">
-            <div class="md:w-1/2">
-                <span class="text-blue-600 font-bold text-sm tracking-widest">現場のリアル</span>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mt-2 mb-6">
-                    「ログインID？ パスワード？<br>
-                    そんなの覚えられないよ」
-                </h2>
-                <p class="text-gray-600 leading-loose text-lg mb-6">
-                    既存の高機能な勤怠ソフトは、ITリテラシーの高いオフィスワーカー向けに作られています。<br>
-                    ヘルメットを被った現場の職人さんや、老眼の進んだ警備員さんに「メールアドレスでログインして」と言っても、運用は定着しません。
-                </p>
-                <div class="bg-white p-4 rounded-lg border-l-4 border-yellow-400 shadow-sm">
-                    <h3 class="font-bold text-blue-900 mb-2">だから、「機能を捨てました」</h3>
-                    <ul class="space-y-4 text-lg text-gray-600">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>ログイン画面なし（自動認識）</li>
-                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>ワークフロー、申請承認なし</li>
-                        <li><i class="fa-solid fa-check text-green-500 mr-2"></i>画面いっぱいの「出勤」ボタンのみ</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="md:w-1/2">
-                <img src="https://placehold.co/500x400/fff/ccc?text=Big+Button+Image" alt="巨大ボタンUI" class="rounded-xl shadow-lg w-full">
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 px-4 gradient-bg text-white text-center">
-        <div class="container mx-auto max-w-3xl">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">
-                本日の勉強会参加者様への<br>
-                <span class="text-yellow-400">先行パートナー募集</span>
+            <h2 class="text-2xl md:text-5xl font-black mb-6 md:mb-8 leading-tight">
+                <span class="text-base md:text-2xl block mb-2 font-normal opacity-90">学生開発のため期間限定</span>
+                先行パートナー<br><span class="text-brand-accent text-4xl md:text-6xl block my-4">数社限定先着順</span>で募集
             </h2>
-            <p class="text-xl mb-10 opacity-90 leading-loose">
-                まだ一般公開前のβ版です。<br>
-                だからこそ、先生のご意見を反映して「先生専用の機能」を実装できます。<br>
-                まずは一番手のかかる顧問先1社で、効果を試してください。
+
+            <p class="text-slate-300 text-sm md:text-lg mb-10 md:mb-12 leading-relaxed max-w-2xl mx-auto">
+                私たちは3人で開発・サポートを行っている学生サークルです。<br class="hidden md:inline">
+                大手企業のように、何千件もの問い合わせには対応できません。<br class="hidden md:inline">
+                お声がけくださった事務所様をしっかりとサポートしたいので、まずは先着の事務所限定とさせてください。
             </p>
-            
-            <div class="bg-white text-gray-800 rounded-2xl p-8 shadow-2xl max-w-xl mx-auto mb-10 text-left">
-                <div class="flex items-center mb-4">
-                    <i class="fa-solid fa-gift text-red-500 text-2xl mr-4"></i>
-                    <div>
-                        <div class="font-bold text-gray-500 text-base">特典 1</div>
-                        <div class="font-bold text-xl">初期費用・月額利用料 <span class="text-red-600">完全無料</span></div>
-                    </div>
+
+            <div class="bg-white text-slate-800 rounded-2xl p-6 md:p-10 shadow-2xl text-left mb-12 transform md:scale-105 border-4 border-brand-accent relative mt-8">
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-brand-accent text-brand-dark font-bold px-6 py-2 rounded-full shadow-lg whitespace-nowrap text-sm md:text-base">
+                    今回お申込みいただいた事務所様へのプレミアム特典
                 </div>
-                <div class="border-t border-gray-200 my-4"></div>
-                <div class="flex items-center mb-4">
-                    <i class="fa-solid fa-user-gear text-blue-500 text-2xl mr-4"></i>
-                    <div>
-                        <div class="font-bold text-gray-500 text-base">特典 2</div>
-                        <div class="font-bold text-xl">最初の1社の導入・設定代行</div>
+
+                <div class="space-y-6 mt-4">
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-red-100 rounded-full flex items-center justify-center text-red-600 text-lg md:text-xl font-bold">1</div>
+                        <div class="ml-3 md:ml-4">
+                            <h4 class="font-bold text-lg md:text-xl">初期費用・月額費用 <span class="text-red-600 text-xl md:text-2xl">永年無料</span></h4>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1">今回お申込みいただいた事務所様は使用料を永久無料にします。導入先の会社様からのみ費用をいただきます。</p>
+                        </div>
                     </div>
-                </div>
-                <div class="border-t border-gray-200 my-4"></div>
-                <div class="flex items-center">
-                    <i class="fa-solid fa-code text-green-500 text-2xl mr-4"></i>
-                    <div>
-                        <div class="font-bold text-gray-500 text-base">特典 3</div>
-                        <div class="font-bold text-xl">先生指定のCSVフォーマット開発</div>
+                    <div class="border-t border-slate-100"></div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-lg md:text-xl font-bold">2</div>
+                        <div class="ml-3 md:ml-4">
+                            <h4 class="font-bold text-lg md:text-xl">現場への導入代行サポート</h4>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1">先生にお手伝いいただくのは顧問先への紹介だけ。私が現場へ説明を行い、定着まで完全にサポートします。</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-slate-100"></div>
+                    <div class="flex items-start">
+                        <div class="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 text-lg md:text-xl font-bold">3</div>
+                        <div class="ml-3 md:ml-4">
+                            <h4 class="font-bold text-lg md:text-xl">先生専用CSV開発</h4>
+                            <p class="text-xs md:text-sm text-slate-600 mt-1">「ウチの独自のExcel形式に合わせて」<br class="md:hidden">お任せください。私たちがコードを書いて対応します。</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div id="partner-form" class="w-full max-w-3xl mx-auto rounded-xl shadow-2xl p-1 bg-gradient-to-r from-yellow-400 to-orange-500">
-                <div class="bg-white rounded-lg p-2 md:p-6">
-                    <!-- ↓↓↓ ここにGoogleフォームからコピーしたiframeタグを貼り付けてください ↓↓↓ -->
-                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJYKJFknjOLdV_0nXb3HClansN_PepMznYXL2PFOjStofoBA/viewform?embedded=true" width="100%" height="1720" frameborder="0" marginheight="0" marginwidth="0" scrolling="no">Loading…</iframe>
-                    <!-- ↑↑↑ ここまで ↑↑↑ -->
+            <div class="bg-white rounded-xl p-4 md:p-8 shadow-lg max-w-2xl mx-auto">
+                <h3 class="text-brand-dark font-bold text-lg md:text-xl mb-6 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-envelope"></i> 無料パートナー登録フォーム
+                </h3>
+                
+                <div class="w-full bg-white rounded-lg overflow-hidden shadow-inner">
+                    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJYKJFknjOLdV_0nXb3HClansN_PepMznYXL2PFOjStofoBA/viewform?embedded=true" width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
                 </div>
             </div>
+
+            <p class="mt-6 text-slate-400 text-xs md:text-sm">
+                ※学生の開発支援と思って使っていただけますと幸いです。いつでも解約できます。<br>
+                ※枠が埋まり次第、無料キャンペーンは終了します。
+            </p>
 
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-500 py-8 text-center text-base">
-        <p>&copy; 2026 Genba DX Inc. All Rights Reserved.</p>
+    <footer class="bg-black text-slate-600 py-8 text-center text-xs">
+        <div class="container mx-auto px-4">
+            <p class="mb-2 text-white font-bold text-base md:text-lg">現場DX (設立準備中)</p>
+            <p>&copy; 2026 Genba DX. All Rights Reserved.</p>
+        </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reveals = document.querySelectorAll('.reveal');
+
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                const elementVisible = 50; // スマホ用に少し数値を小さく調整
+
+                reveals.forEach((reveal) => {
+                    const elementTop = reveal.getBoundingClientRect().top;
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveal.classList.add('active');
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', revealOnScroll);
+            // 初期ロード時にも実行
+            revealOnScroll();
+        });
+    </script>
 </body>
 </html>

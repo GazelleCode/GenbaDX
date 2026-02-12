@@ -75,8 +75,7 @@
     <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <div class="bg-brand-main text-white w-8 h-8 flex items-center justify-center rounded font-bold text-lg">G</div>
-                <span class="font-bold text-xl tracking-tight text-slate-800">現場DX</span>
+                <img src="img/dakoku_logo.png" alt="らくらく現場打刻" class="h-10 w-auto">
             </div>
             <a href="#partner-form" class="bg-brand-main hover:bg-brand-dark text-white text-sm font-bold py-2 px-4 rounded-full transition shadow-md">
                 パートナー登録(無料)
@@ -100,7 +99,7 @@
                         </span>
                     </div>
 
-                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-black leading-tight mb-6">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black leading-relaxed mb-8 drop-shadow-lg tracking-tight">
                         先生、まだ<br>
                         <span class="text-gradient border-b-4 border-yellow-500/50">「手書きFAXの解読」</span>を<br>
                         ご自身でされているのですか？
@@ -137,31 +136,14 @@
 
                 <div class="md:w-2/5 w-full relative reveal active delay-200">
                     <div class="relative w-full aspect-square animate-float">
-                        <div class="absolute top-0 right-0 w-3/4 h-3/4 bg-slate-800 rounded-2xl shadow-2xl p-4 rotate-6 opacity-60 z-0 border border-slate-600">
-                            <div class="flex flex-col h-full justify-center items-center text-slate-500">
-                                <i class="fa-solid fa-file-excel text-6xl mb-2"></i>
-                                <span class="font-bold text-sm">解読不能な手書き日報...</span>
-                            </div>
+                        <div class="absolute top-0 right-0 w-3/4 z-0 transform rotate-6 opacity-90">
+                            <img src="img/screen (1).png" alt="管理画面" class="w-full drop-shadow-2xl">
                         </div>
-                        <div class="absolute bottom-0 left-0 w-3/4 h-3/4 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-10 border-4 border-slate-700 overflow-hidden">
-                            <div class="h-full flex flex-col">
-                                <div class="bg-brand-dark p-3 flex justify-between items-center text-white">
-                                    <span class="text-xs">9:00</span>
-                                    <i class="fa-solid fa-signal text-xs"></i>
-                                </div>
-                                <div class="flex-1 flex flex-col items-center justify-center p-4 bg-slate-50 gap-4">
-                                    <div class="w-full bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl h-24 flex items-center justify-center shadow-lg text-white font-black text-3xl">
-                                        出勤
-                                    </div>
-                                    <div class="w-full bg-gradient-to-br from-red-500 to-red-600 rounded-xl h-24 flex items-center justify-center shadow-lg text-white font-black text-3xl opacity-50">
-                                        退勤
-                                    </div>
-                                </div>
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-xl border border-green-200 flex items-center gap-2">
-                                    <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
-                                    <div class="text-xs font-bold text-slate-700">GPS認証OK<br><span class="text-[10px] text-slate-500">東京都世田谷区...</span></div>
-                                </div>
-                            </div>
+                        <div class="absolute bottom-0 left-0 w-3/4 z-10">
+                            <img src="img/screen (2).png" alt="スマホ打刻画面" class="w-full drop-shadow-2xl">
+                            <div class="absolute -bottom-4 -right-4 bg-white/90 backdrop-blur px-4 py-2 rounded-full shadow-xl border border-green-200 flex items-center gap-2 animate-bounce">
+                                <i class="fa-solid fa-circle-check text-green-500 text-xl"></i>
+                                <div class="text-xs font-bold text-slate-700">GPS認証機能付き</div>
                         </div>
                     </div>
                 </div>
